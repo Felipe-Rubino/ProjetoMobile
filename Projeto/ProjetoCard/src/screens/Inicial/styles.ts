@@ -57,13 +57,20 @@ export const QuartaImagem = styled.Image `
 export const Conteudo = styled.View `
     padding-left: 22px;
     position: absolute;
-    top: 400;
+    top: 400px;
     width: 100%
 `
 
 export const Titulo = styled.Text `
     font-size: 50px;
-    
+    /* font-weight: ${({theme}) => theme.FONT_FAMILY.REGULAR} */
+    font-weight: 800px;
+    color: ${ ( { theme }) => theme.COLORS.WHITE}
 `
 
+export const ContainerBotao = styled.View `
+    padding-bottom: 80px;
+    align-items: center
+    
+`
 
