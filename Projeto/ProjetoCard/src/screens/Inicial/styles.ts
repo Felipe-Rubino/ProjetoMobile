@@ -1,6 +1,7 @@
 import styled from 'styled-components/native'
+import { SafeAreaView } from 'react-native-safe-area-context';
 
-export const Container = styled.View `
+export const Container = styled(SafeAreaView)`
     flex: 1;
     background-color: ${ ( { theme }) => theme.COLORS.PRIMARY};
 `;
@@ -63,8 +64,7 @@ export const Conteudo = styled.View `
 
 export const Titulo = styled.Text `
     font-size: 50px;
-    /* font-weight: ${({theme}) => theme.FONT_FAMILY.REGULAR} */
-    font-weight: 800px;
+    font-weight: 800;
     color: ${ ( { theme }) => theme.COLORS.WHITE}
 `
 
