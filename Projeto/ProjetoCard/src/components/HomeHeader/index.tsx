@@ -1,12 +1,40 @@
-import React from "react";
-import { HStack, Heading } from 'native-base'
+import React from 'react';
+import {Button, HStack, Heading, Icon, IconButton, VStack} from 'native-base';
+import {LogoFoto} from '../LogoFoto';
+import IconPerfil from 'react-native-vector-icons/MaterialCommunityIcons';
+import {TouchableOpacity, Alert} from 'react-native';
 
 export function HomeHeader() {
-    return (
-        <HStack>
-            <Heading>
-                rodrigo
-            </Heading>
-        </HStack>
-    )
+
+  const togglemodal = () => {
+    Alert.alert("Abrir modal")
+  }
+
+  return (
+    <HStack bg="#007260" pt={8} pb={5} px={8}>
+      <VStack flex={1}>
+        <Button size={35} bg="transparent" _pressed={{bg : 'transparent'}} onPress={togglemodal}>
+        <Icon
+          as={IconPerfil}
+          name="account-plus-outline"
+          size={35}
+          color="white"
+        />
+        </Button> 
+      </VStack>
+      <VStack flex={1} mr={7}>
+        <LogoFoto
+          source={require('../../assets/images/neki.png')}
+          alt="Imagem da empresa"
+          size={16}
+          borderColor='transparent'
+        />
+      </VStack>
+      <VStack>
+        <TouchableOpacity>
+          <Icon as={IconPerfil} name="logout" size={35} color="white" />
+        </TouchableOpacity>
+      </VStack>
+    </HStack>
+  );
 }

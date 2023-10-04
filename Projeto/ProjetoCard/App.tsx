@@ -11,7 +11,6 @@ function App() {
       <NativeBaseProvider>
         <StatusBar
           barStyle={'light-content'}
-          backgroundColor="transparent"
           translucent
         />
         <Routes />
