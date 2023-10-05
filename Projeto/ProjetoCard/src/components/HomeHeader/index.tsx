@@ -3,24 +3,28 @@ import {Button, HStack, Heading, Icon, IconButton, VStack} from 'native-base';
 import {LogoFoto} from '../LogoFoto';
 import IconPerfil from 'react-native-vector-icons/MaterialCommunityIcons';
 import {TouchableOpacity, Alert} from 'react-native';
+import { IPageProps } from '../../@types/navigation';
+import { NavigationProp } from '@react-navigation/native';
 
-export function HomeHeader() {
 
-  const togglemodal = () => {
-    Alert.alert("Abrir modal")
+export function HomeHeader( {navigation} : IPageProps ) {
+
+
+  function handleRegister() {
+    navigation.navigate('Cadastro');
   }
 
   return (
     <HStack bg="#007260" pt={8} pb={5} px={8}>
       <VStack flex={1}>
-        <Button size={35} bg="transparent" _pressed={{bg : 'transparent'}} onPress={togglemodal}>
+        <Button size={35} bg="transparent" _pressed={{bg : 'transparent'}} onPress={handleRegister} >
         <Icon
           as={IconPerfil}
           name="account-plus-outline"
           size={35}
           color="white"
         />
-        </Button> 
+        </Button>
       </VStack>
       <VStack flex={1} mr={7}>
         <LogoFoto

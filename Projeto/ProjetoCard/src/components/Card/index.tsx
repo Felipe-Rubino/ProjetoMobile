@@ -4,45 +4,6 @@ import Fotos from '../Colaboradores';
 import FeedCard from '../FeedCard';
 import { listaColaborador } from '../../service/api';
 
-// const data = [
-//     {
-//         id: 1,
-//         nome: "Felipe dos santos rubino",
-//         nomeSocial : "Felipe",
-//         Email: "FelipeRubino60@gmail.com",
-//         dataNascimento: "16/02/2004",
-//         telefone: "981773517",
-//         avatarUrl: "https://images.pexels.com/photos/6210320/pexels-photo-6210320.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-//     },
-//     {
-//         id: 2,
-//         nome: "Claudia junior da rocha ",
-//         nomeSocial : "Claudia",
-//         Email: "claudia60@gmail.com",
-//         dataNascimento: "16/02/2001",
-//         telefone: "981553517",
-//         avatarUrl: "https://images.pexels.com/photos/4909321/pexels-photo-4909321.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-//     },
-//     {
-//         id: 3,
-//         nome: "Claudia junior da rocha ",
-//         nomeSocial : "Claudia",
-//         Email: "claudia60@gmail.com",
-//         dataNascimento: "16/02/2001",
-//         telefone: "981553517",
-//         avatarUrl: "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-//     },
-//     {
-//         id: 4,
-//         nome: "Claudia junior da rocha ",
-//         nomeSocial : "Claudia",
-//         Email: "claudia60@gmail.com",
-//         dataNascimento: "16/02/2001",
-//         telefone: "981553517",
-//         avatarUrl: "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-//     }
-// ]
-
 function CardHome() {
 
     const [colaborador, setColaborador] = useState([])

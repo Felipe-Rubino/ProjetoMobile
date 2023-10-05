@@ -4,14 +4,14 @@ import {HomeHeader} from '../../components/HomeHeader';
 import {Container} from './style';
 import {HStack, Heading, VStack} from 'native-base';
 import CardHome from '../../components/Card';
+import { IPageProps } from '../../@types/navigation';
 
-export function Home() {
+
+export function Home( {navigation} : IPageProps ) {
   return (
     <Container>
-      <VStack flex={1} bg={'#FFFFFF'}>
-        <HomeHeader />
+        <HomeHeader navigation={navigation}  />
         <CardHome />
-      </VStack>
     </Container>
   );
 }
