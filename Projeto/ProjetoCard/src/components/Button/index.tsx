@@ -3,7 +3,7 @@ import { Button as ButtonNativeBase, IButtonProps} from 'native-base'
 import { TextoBotao } from "./style";
 
 type Props = IButtonProps & {
-    title: string;
+    title?: string;
 }
 
 
