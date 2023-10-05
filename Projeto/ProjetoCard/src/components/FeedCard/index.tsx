@@ -6,8 +6,8 @@ import IconPerfil from 'react-native-vector-icons/MaterialCommunityIcons';
 export default function FeedCard( { data } : dataProps ) {
 
     const renderDate = (date : String)  => {
-        const D = new Date() 
-        return `${D.getDate()}/${D.getMonth() +1}/${D.getFullYear()}`
+       const formattedDate = format(new Date(date), 'dd/MM/yyyy');  
+       return formattedDate
     }
 
     return(
