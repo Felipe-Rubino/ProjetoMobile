@@ -16,8 +16,6 @@ type imagem = {
 export type dataProps = {
     data : Data
 }
-
-
 export interface ModalProps {
     modalVisible: boolean;
     headerTitle?: string;
@@ -25,3 +23,4 @@ export interface ModalProps {
     onClose: () => void;
     onAction: () => void;
 }
+

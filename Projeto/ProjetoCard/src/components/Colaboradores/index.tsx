@@ -7,7 +7,7 @@ export default function Fotos( { data } : dataProps ) {
     return (
         <Box flex={1} ml={2}>
             <Image
-                source={{uri :data.avatarUrl}}
+                source={{uri : "data:image/png;base64," + data.imagem.dados}}
                 width={16}
                 height={16}
                 borderRadius={32}
