@@ -84,7 +84,7 @@ export default function FeedCard({data}: dataProps) {
           resizeMode="cover"
         />
       </Box>
-      <Box marginY={2}>
+      <Box marginY={2}  > 
         <Center>
           <Heading fontSize={20} ml={2}>
             {data.nome}

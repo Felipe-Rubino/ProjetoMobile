@@ -3,5 +3,6 @@ import styled from 'styled-components/native'
 
 export const Container = styled(SafeAreaView) `
     flex: 1;
-    background-color: ${ ( { theme }) => theme.COLORS.GREY};
+    background-color: ${ ( { theme }) => theme.COLORS.WHITE};
+    height: 100%
 `;
