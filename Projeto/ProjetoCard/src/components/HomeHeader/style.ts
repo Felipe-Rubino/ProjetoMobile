@@ -6,7 +6,3 @@ export const FormContainer = styled.View `
     justify-content: center;
     margin: 20px
 `;
-
-export const FormView = styled.View `
-
-`

@@ -6,18 +6,19 @@ export type Data = {
     dataDeNascimento: string;
     telefone : string;
     imagem: imagem;
+    dados?: imagem;
+    instagram ?: string;
+    gitHub?: string;
+    linkedin?: string;
+    facebook?: string;
 }
-
 type imagem = {
     imagemId : number;
     dados: string;
 }
-
 export type dataProps = {
     data : Data
 }
-
-
 export interface ModalProps {
     modalVisible: boolean;
     headerTitle?: string;
@@ -25,3 +26,4 @@ export interface ModalProps {
     onClose: () => void;
     onAction: () => void;
 }
+

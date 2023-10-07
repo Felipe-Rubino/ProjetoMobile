@@ -15,7 +15,7 @@ export function HomeHeader( {navigation} : IPageProps ) {
   }
 
   return (
-    <HStack bg="#007260" pt={8} pb={5} px={8}>
+    <HStack bg="#007260" pt={5}  px={3}>
       <VStack flex={1}>
         <Button size={35} bg="transparent" _pressed={{bg : 'transparent'}} onPress={handleRegister} >
         <Icon

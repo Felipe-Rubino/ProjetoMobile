@@ -5,6 +5,7 @@ import {Container} from './style';
 import {HStack, Heading, VStack} from 'native-base';
 import CardHome from '../../components/Card';
 import { IPageProps } from '../../@types/navigation';
+import Button from '../../components/Button';
 
 
 export function Home( {navigation} : IPageProps ) {
