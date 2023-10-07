@@ -2,18 +2,19 @@ import React, {useState} from 'react';
 import Input from '../../components/Input';
 import {Center, ScrollView, VStack, Skeleton, Text} from 'native-base';
 import {LogoFoto} from '../../components/LogoFoto';
-import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
-import { TouchableOpacity } from 'react-native';
+import {launchImageLibrary} from 'react-native-image-picker';
+import { TouchableOpacity, Alert } from 'react-native';
 import { FraseErro } from './style';
 import { cadastroColaborador } from '../../service/api';
 import Button from '../../components/Button';
+import { IPageProps } from '../../@types/navigation';
 
 const PHOTO_SIZE = 150;
 
 
 const ImagemPadrao = require('../../assets/images/neki.png');
 
-export function Register() {
+export function Register({navigation} : IPageProps ) {
   const [photoIsLoading, setPhotoIsLoading] = useState(false);
   const [userPhoto, setUserPhoto] = useState<any>();
   const [email, setEmail] = useState('');
@@ -25,7 +26,9 @@ export function Register() {
   const [gitHub, setGitHub] = useState('')
   const [facebook, setFacebook] = useState('')
   const [linkedin, setLinkedin] = useState('')
-  const [errorMensagem, setErrorMensagem] = useState({})
+  const [errorMensagem, setErrorMensagem] = useState<{ name?: string; message?: string }>({});
+  
+
 
   type MessageError = {
     name ?: string;
@@ -59,22 +62,55 @@ export function Register() {
   }
 
   const erro = {
-    noEmail: 'Por favor coloque o e-mail',
-    noNome: 'Por favor coloque seu nome',
-    noData: 'Por favor coloque a data', 
-    noFoto: 'Por favor coloque a foto'
-  }
+    noEmail: 'Por favor, coloque o e-mail',
+    noNomeCompleto: 'Por favor, coloque seu nome completo',
+    noData: 'Por favor, coloque a data', 
+    noFoto: 'Por favor, coloque a foto'
+  } 
 
-  const errorMSG = (name :string, errorMensagem ? : MessageError) => {
+  const errorMSG = (name : string) => {
     return (
         errorMensagem &&
         name === errorMensagem.name && (
             <FraseErro>{errorMensagem.message}</FraseErro>
-        )
+      )
     )
   }
 
+  const validateInput = (email : string) => {
+    setErrorMensagem({})
+    if(!email){
+      setErrorMensagem({ name : "noEmail", message: erro.noEmail})
+      setTimeout(() => {
+        setErrorMensagem({})
+      }, 2500)
+      return false;
+    }
+    if(!nomeCompleto){
+      setErrorMensagem({ name : "noNomeCompleto", message: erro.noNomeCompleto})
+      setTimeout(() => {
+        setErrorMensagem({})
+      }, 2500)
+      return false;
+    }
+    if(!userPhoto) {
+      setErrorMensagem({ name : 'noFoto', message: erro.noFoto})
+      setTimeout(() => {
+        setErrorMensagem({})
+      }, 2500)
+      return false;
+    }
+    if(!dataNascimento){
+      setErrorMensagem({ name : 'noData', message : erro.noData})
+      setTimeout(() => {
+        setErrorMensagem({})
+      }, 2500)
+      return false;
+    }
+  }
+
   const handleRegisterPerfil = async () => {
+    if(validateInput(email)){
     const data = new FormData();
         console.log("foto", userPhoto)
         data.append('email', email);
@@ -92,10 +128,15 @@ export function Register() {
         data.append('facebook', facebook);
     try {
         const response = await cadastroColaborador(data);
+        Alert.alert('Cadastro concluído');
+        setTimeout(() => {
+          navigation.navigate('Home')
+        }, 3000)
     }catch(error){
         console.log(error)
     }
   }
+}
 
 
   return (
@@ -123,9 +164,12 @@ export function Register() {
                     Adicionar Foto
                 </Text>
            </TouchableOpacity>
-            {errorMSG('noEmail')}
-            {errorMSG('noNome')}
+           {errorMSG('noEmail') && (
+          <FraseErro>{errorMensagem.message}</FraseErro>
+          )}
+            {errorMSG('noNomeCompleto')}
             {errorMSG('noFoto')}
+            {errorMSG('noData')}
             <Input 
           placeholder="E-mail" 
           keyboardType='email-address' 
@@ -133,6 +177,7 @@ export function Register() {
           value={email} 
           onChangeText={texto => setEmail(texto)}
           />
+             
           <Input 
           placeholder="Nome Completo" 
           keyboardType='default'
