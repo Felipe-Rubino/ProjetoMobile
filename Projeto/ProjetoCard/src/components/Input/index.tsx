@@ -12,6 +12,11 @@ function Input( {...rest} : IInputProps) {
             color="black"
             fontFamily="body"
             mb={4}
+            _focus={{
+                bg: '#ebe8e8',
+                borderColor: '#007260',
+                borderWidth: '1'
+            }}
             {...rest}
         />
     )

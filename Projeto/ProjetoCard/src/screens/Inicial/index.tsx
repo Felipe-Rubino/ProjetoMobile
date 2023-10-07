@@ -1,5 +1,4 @@
 import React from 'react';
-import {Text} from 'react-native';
 import {
   Container,
   ContainerBotao,
@@ -33,7 +32,7 @@ function Inicial() {
           <TerceiraImagem source={require('../../assets/images/Foto3.jpg')} />
           <QuartaImagem source={require('../../assets/images/Foto4.png')} />
           <Conteudo>
-            <Titulo>Bem vindo!!</Titulo>
+            <Titulo>Bem vindo!</Titulo>
           </Conteudo>
         </ContainerFoto>
       </ContainerPrincipal>

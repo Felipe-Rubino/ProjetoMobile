@@ -65,7 +65,9 @@ export const Conteudo = styled.View `
 export const Titulo = styled.Text `
     font-size: 50px;
     font-weight: 800;
-    color: ${ ( { theme }) => theme.COLORS.WHITE}
+    color: ${ ( { theme }) => theme.COLORS.WHITE};
+    text-align: center;
+    margin-right: 5px;
 `
 
 export const ContainerBotao = styled.View `
