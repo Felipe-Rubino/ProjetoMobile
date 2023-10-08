@@ -12,6 +12,7 @@ export const ModalContent = styled.View `
     padding: 20px;
     border-radius: 10px;
     width: 80%;
+    
 `
 export const SocialIconsContainer = styled.View`
   flex-direction: row;
@@ -24,4 +25,20 @@ export const SocialIcon = styled.View`
 
 export const SocialText = styled.Text`
   font-weight: 800;
+`;
+
+export const DeleteButton = styled.TouchableOpacity`
+  background-color: ${({theme}) => theme.COLORS.RED};
+  align-items: center;
+  justify-content: center;
+  height: 30px;
+  margin-bottom: 20px
+`;
+
+export const UpdateButton = styled.TouchableOpacity`
+  align-items: center;
+  justify-content: center;
+  background-color: ${({theme}) => theme.COLORS.PRIMARY};
+  margin-bottom: 15px
+ 
 `;

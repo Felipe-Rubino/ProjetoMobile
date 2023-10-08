@@ -6,25 +6,26 @@ import {
   Spinner,
   Heading
 } from 'native-base';
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useCallback} from 'react';
 import Fotos from '../Colaboradores';
 import FeedCard from '../FeedCard';
 import {listaColaborador, listarImagem} from '../../service/api';
+import { useFocusEffect } from '@react-navigation/native';
 
 function CardHome() {
   const [colaborador, setColaborador] = useState([]);
   const [imagem, setImagem] = useState([]);
   const [cardIsLoading, setCardIsLoading] = useState(false);
 
-  useEffect(() => {
-    setCardIsLoading(true)
+
+   
     async function fetchLista() {
+      setCardIsLoading(true)
       const response = await listaColaborador();
       setColaborador(response.data);
       setCardIsLoading(false)
     }
-    fetchLista();
-  }, []);
+
 
   useEffect(() => {
     async function fetchImagem() {
@@ -33,6 +34,12 @@ function CardHome() {
     }
     fetchImagem();
   }, []);
+
+  useFocusEffect(
+    useCallback(() => {
+      fetchLista();
+    }, [])
+  )
 
   return (
     <>

@@ -1,6 +1,6 @@
 {
   "name": "ProjetoCard",
-  "version": "3.3.0",
+  "version": "4.2.0",
   "private": true,
   "scripts": {
     "android": "react-native run-android",

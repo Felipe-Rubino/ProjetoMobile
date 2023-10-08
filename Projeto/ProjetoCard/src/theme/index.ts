@@ -5,6 +5,7 @@ export default {
       PRIMARY: '#007260', 
       SECONDARY: '#39B68D',  
       GREY: '#CCCCCC',
+      RED: '#ec5353'
     },
     FONT_FAMILY: {
       REGULAR: 'Roboto_400Regular',

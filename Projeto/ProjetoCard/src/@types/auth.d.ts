@@ -1,19 +1,22 @@
 export interface AuthType {
-    currentUserId: number;
-    token : TokenType;
-    login : (email: string, password: string) => void;  
+  currentUserId: number;
+  setCurrentUserId: React.Dispatch<React.SetStateAction<number>>;
+  token: TokenType;
+  setToken: React.Dispatch<React.SetStateAction<TokenType>>;
+  isAuthenticated: boolean;
+  setIsAuthenticated: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export interface UserDataType {
-    email : string;
-    password : string;
+  email: string;
+  password: string;
 }
 
 export interface TokenType {
-    token: string;
+  token : string;
 }
 
 export interface ApiDataType {
-    token? : TokenType;
-    userData?: UserDataType;
+  token?: TokenType;
+  currentUserId?: UserDataType;
 }

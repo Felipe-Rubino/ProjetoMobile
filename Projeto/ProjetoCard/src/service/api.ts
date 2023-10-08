@@ -1,4 +1,5 @@
 import axios from "axios";
+import { TokenType } from "../@types/auth";
 
 
 export const Api = axios.create({
@@ -28,3 +29,6 @@ export const createSession = async (email : string, password : string) => {
     }
 };
 
+export const deleteColaborador = async (colaboradorId : number, token : TokenType) => {
+    return Api.delete(`/colaborador/${colaboradorId}${token}`)
+}
