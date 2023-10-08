@@ -5,6 +5,7 @@ import Inicial from "../screens/Inicial";
 import Login from "../screens/Login";
 import { Home } from "../screens/Home";
 import { Register } from "../screens/Register";
+import HeaderIconAdm from "../components/HeaderIconAdm";
 
 type AppRoutes = {
     Inicial : undefined;
@@ -33,5 +34,6 @@ export function AppRoutes() {
             headerTintColor: '#FFF'
             }}/>
         </Navigator>    
+        
     );
 }

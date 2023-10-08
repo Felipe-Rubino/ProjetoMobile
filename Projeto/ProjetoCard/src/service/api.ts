@@ -18,3 +18,13 @@ export const cadastroColaborador = async (formData : FormData) => {
 export const listarImagem = async () => {
     return Api.get('/imagem/lista')
 }
+
+export const createSession = async (email : string, password : string) => {
+    try {
+      const response = await Api.post('/auth/signin', { email, password });
+      return response.data;
+    } catch (error) {
+      throw error;
+    }
+};
+

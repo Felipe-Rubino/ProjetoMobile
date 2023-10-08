@@ -4,7 +4,6 @@ import {LogoFoto} from '../LogoFoto';
 import IconPerfil from 'react-native-vector-icons/MaterialCommunityIcons';
 import {TouchableOpacity, Alert} from 'react-native';
 import { IPageProps } from '../../@types/navigation';
-import { NavigationProp } from '@react-navigation/native';
 
 
 export function HomeHeader( {navigation} : IPageProps ) {
