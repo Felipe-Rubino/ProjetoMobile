@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import Input from '../../components/Input';
-import {Center, ScrollView, VStack, Skeleton, Text} from 'native-base';
+import {Center, ScrollView, VStack, Skeleton, Text, Icon} from 'native-base';
 import {LogoFoto} from '../../components/LogoFoto';
 import {launchImageLibrary} from 'react-native-image-picker';
 import { TouchableOpacity, Alert } from 'react-native';
@@ -8,6 +8,8 @@ import { FraseErro } from './style';
 import { cadastroColaborador } from '../../service/api';
 import Button from '../../components/Button';
 import { IPageProps } from '../../@types/navigation';
+import IconPerfil from 'react-native-vector-icons/MaterialCommunityIcons';
+import HeaderIconAdm from '../../components/HeaderIconAdm';
 
 const PHOTO_SIZE = 150;
 
@@ -159,6 +161,7 @@ export function Register({navigation} : IPageProps ) {
             mb={3}
            />
            ) }
+           <HeaderIconAdm navigation={navigation} />
            <TouchableOpacity onPress={handleSelectPhoto} >
                 <Text color="#007260" fontWeight="bold" fontSize="md" mt={2} mb={8}> 
                     Adicionar Foto
