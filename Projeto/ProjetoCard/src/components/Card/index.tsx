@@ -128,6 +128,7 @@ function CardHome() {
         animationType="none"
         onRequestClose={onClose}
         >
+        //input bugado demorando mas funciona
         <ModalDialog style={{ maxHeight: 550 }}>
           <Button title="Fechar" onPress={onClose} />
           <ModalContent>
