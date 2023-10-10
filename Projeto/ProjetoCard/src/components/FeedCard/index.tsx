@@ -1,6 +1,6 @@
 import React, {useState, useContext} from 'react';
 import {Box, Image, Heading, Icon, Text, HStack, Center} from 'native-base';
-import {dataProps} from '../../@types/type';
+import {FeedCardProps} from '../../@types/type';
 import IconPerfil from 'react-native-vector-icons/MaterialCommunityIcons';
 import {
   ModalContent,
@@ -9,56 +9,40 @@ import {
   SocialIcon,
   SocialText,
   DeleteButton,
-  UpdateButton,
 } from './style';
-import {Modal, View, Button, TouchableOpacity} from 'react-native';
+import {Modal, Button, TouchableOpacity} from 'react-native';
 import {AuthContext} from '../../context/authContext';
-import {Api, deleteColaborador} from '../../service/api';
-import {TokenType} from '../../@types/auth';
-import Input from '../Input';
 
 interface CustomAlertProps {
   visible: boolean;
-  onClose: () => void;
+  onClose?: () => void;
   message?: string;
 }
 
-export default function FeedCard({data}: dataProps) {
+export default function FeedCard({
+  data,
+  onDelete,
+  setEditData,
+  setModalEdit,
+}: FeedCardProps) {
   const [showAlert, setShowAlert] = useState(false);
   const [showModal, setShowModal] = useState(false);
-  const [modalEdit, setModalEdit] = useState(false);
   const {isAuthenticated, token} = useContext(AuthContext);
-  const [editData, setEditData] = useState({
-    email : '',
-    nome: '',
-    nomeSocial : '',
-    dataDeNascimento: '',
-    telefone: '',
-    instagram: '',
-    gitHub: '',
-    linkedin : '',
-    facebook: ''
-  })
 
-  const renderDate = (date: string) => {
-    const D = new Date(date);
-    return `${D.getDate()}/${D.getMonth() + 1}/${D.getFullYear()}`;
-  };
-
-  const fetchDeleteColaborador = async (
-    colaboradorId: number,
-    token: TokenType
-  ) => {
-    const id = colaboradorId;
-    console.log(colaboradorId);
-    try {
-      const response = await deleteColaborador(id, token);
-      Api.defaults.headers.common['Authorization'] = `Bearer ${token.token}`;
-  
-      console.log(response);
-    } catch (error) {
-      console.log(error);
-    }
+  const handleOpenModalEdit = () => {
+    setEditData({
+      colaboradorId: data.colaboradorId,
+      email: data.email || '',
+      nome: data.nome || '',
+      nomeSocial: data.nomeSocial || '',
+      dataDeNascimento: data.dataDeNascimento || '',
+      telefone: data.telefone || '',
+      instagram: data.instagram || '',
+      gitHub: data.gitHub || '',
+      linkedin: data.linkedin || '',
+      facebook: data.facebook || '',
+    });
+    setModalEdit(true);
   };
 
   function ModalDelete({visible, onClose, message}: CustomAlertProps) {
@@ -75,42 +59,16 @@ export default function FeedCard({data}: dataProps) {
               Tem certeza que deseja deletar?{' '}
             </Text>
             <DeleteButton
-              onPress={() => fetchDeleteColaborador(data.colaboradorId, token)}>
+              onPress={async () => {
+                await onDelete(data.colaboradorId, token);
+                setShowModal(false);
+              }}>
               <Text textAlign="center" color="#fff" fontSize={20}>
                 Deletar
               </Text>
             </DeleteButton>
-            <Button title="Fechar" onPress={onClose} />
+            <Button title='Fechar' onPress={onClose} />
           </ModalContent>
-        </ModalDialog>
-      </Modal>
-    );
-  }
-
-  function ModalEdit({visible, onClose, message}: CustomAlertProps) {
-    return (
-      <Modal
-        visible={visible}
-        transparent={true}
-        animationType="slide"
-        onRequestClose={onClose}>
-        <ModalDialog>
-        <Button title="Fechar" onPress={onClose} />
-          <ModalContent>
-            <Input placeholder="Email" keyboardType="email-address" value={editData.email}  onChangeText={(text) => handleEditChange('email', text)} />
-            <Input placeholder="Nome completo" keyboardType="default" value={editData.nome}  onChangeText={(text) => handleEditChange('nome', text)}/>
-            <Input placeholder="Nome social" keyboardType="default" value={editData.nomeSocial}  onChangeText={(text) => handleEditChange('nomeSocial', text)}/>
-            <Input placeholder="Data de nascimento" keyboardType="numeric" value={editData.dataDeNascimento}  onChangeText={(text) => handleEditChange('dataDeNascimento', text)}/>
-            <Input placeholder="Telefone" keyboardType="numeric" value={editData.telefone}  onChangeText={(text) => handleEditChange('telefone', text)}/>
-            <Input placeholder="Instagram" keyboardType="default" value={editData.instagram}  onChangeText={(text) => handleEditChange('instagram', text)}/>
-            <Input placeholder="GitHub" keyboardType="default" value={editData.gitHub}  onChangeText={(text) => handleEditChange('gitHub', text)}/>
-            <Input placeholder="Linkedin" keyboardType="default" value={editData.linkedin}  onChangeText={(text) => handleEditChange('linkedin', text)}/>
-            <Input placeholder="Facebook" keyboardType="default" value={editData.facebook}  onChangeText={(text) => handleEditChange('facebook', text)}/>
-            <UpdateButton onPress={onClose} >
-              <Text color="#fff" fontSize={20} >Atualizar</Text>
-            </UpdateButton>
-          </ModalContent>
-          
         </ModalDialog>
       </Modal>
     );
@@ -164,28 +122,6 @@ export default function FeedCard({data}: dataProps) {
     setShowModal(true);
   };
 
-  const handleOpenModalEdit = () => {
-    setEditData({
-      email: data.email || '', 
-      nome: data.nome || '',
-      nomeSocial: data.nomeSocial || '',
-      dataDeNascimento: renderDate(data.dataDeNascimento) || '',
-      telefone: data.telefone || '',
-      instagram: data.instagram || '',
-      gitHub: data.gitHub || '',
-      linkedin: data.linkedin || '',
-      facebook: data.facebook || '',
-    })
-    setModalEdit(true);
-  };
-
-  const handleEditChange = (fieldName: string, value : string) => {
-    setEditData({
-      ...editData,
-      [fieldName] : value,
-    })
-  }
-
   return (
     <Box
       flex={1}
@@ -214,10 +150,10 @@ export default function FeedCard({data}: dataProps) {
         </Center>
         <HStack>
           <Icon as={IconPerfil} name="calendar" size={6} color="black" ml={2} />
-          <Text fontWeight={500}>{renderDate(data.dataDeNascimento)}</Text>
+          <Text fontWeight={800}>{data.dataDeNascimento}</Text>
           <Icon as={IconPerfil} name="id-card" size={6} color="black" ml={5} />
-          <Text fontWeight={500}> ID : {data.colaboradorId}</Text>
-          <Text fontWeight={700} ml={2}>
+          <Text fontWeight={800}> ID : {data.colaboradorId}</Text>
+          <Text fontWeight={800} ml={2}>
             {data.nomeSocial}
           </Text>
         </HStack>
@@ -241,7 +177,7 @@ export default function FeedCard({data}: dataProps) {
                 color="black"
                 ml={2}
               />
-              <Text fontWeight={500}>{data.telefone}</Text>
+              <Text fontWeight={800}>{data.telefone}</Text>
             </>
           ) : (
             <>
@@ -284,10 +220,6 @@ export default function FeedCard({data}: dataProps) {
               </TouchableOpacity>
               <TouchableOpacity onPress={handleOpenModalEdit}>
                 <Icon as={IconPerfil} name="pencil" size={6} ml={5} />
-                <ModalEdit
-                  visible={modalEdit}
-                  onClose={() => setModalEdit(false)}
-                />
               </TouchableOpacity>
             </>
           ) : null}
