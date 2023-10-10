@@ -4,7 +4,6 @@ type RootStackParamList = {
     Inicial: undefined;
     Cadastro: undefined;
 }
-
 export interface IPageProps {
     navigation : NativeStackNavigationProp<RootStackParamList >
 }

@@ -5,12 +5,11 @@ import {
   VStack,
   HStack,
   Button,
-  Text,
   FormControl,
   Icon,
 } from 'native-base';
 import React, {useContext, useState, useEffect} from 'react';
-import {View, TouchableOpacity, Alert} from 'react-native';
+import {TouchableOpacity, Alert} from 'react-native';
 import {IPageProps} from '../../@types/navigation';
 import IconPerfil from 'react-native-vector-icons/MaterialCommunityIcons';
 import {AuthContext} from '../../context/authContext';
@@ -23,7 +22,8 @@ function Login({navigation}: IPageProps) {
   const [password, setPassword] = useState('');
 
   const context = useContext(AuthContext);
-  const emailPattern = /@neki-it\.com\.br$/;
+  const emailPattern = /@neki-(it\.com\.br|com\.br)$/;
+
 
   useEffect(() => {
     async function checkToken() {
@@ -32,7 +32,6 @@ function Login({navigation}: IPageProps) {
 
       if (token && loggedUserId) {
         context.setCurrentUserId(JSON.parse(loggedUserId));
-        // context.setToken(token);
         context.setIsAuthenticated(true);
       }
     }
@@ -64,7 +63,7 @@ function Login({navigation}: IPageProps) {
   return (
     <Center w="100%">
       <Box safeArea p="2" py="8" w="90%" maxW="290">
-        <HStack justifyContent="center">
+        <HStack >
           <TouchableOpacity onPress={() => navigation.goBack()}>
             <Icon as={IconPerfil} name="arrow-left" size={33} />
           </TouchableOpacity>
@@ -72,7 +71,7 @@ function Login({navigation}: IPageProps) {
             size="lg"
             fontWeight="600"
             textAlign="center"
-            color="coolGray.800">
+            >
             Bem vindo!
           </Heading>
         </HStack>

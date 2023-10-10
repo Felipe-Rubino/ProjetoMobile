@@ -15,9 +15,15 @@ export const AuthProvider: React.FC<Props> = ({children} : Props) => {
     const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
     const context = useContext(AuthContext);
 
+    const logout = () => {
+        AsyncStorage.removeItem('token')
+        setToken({ token: null });
+        setIsAuthenticated(false)
+    }
+
 
     return (
-        <AuthContext.Provider value={{ token, currentUserId, isAuthenticated, setToken, setCurrentUserId, setIsAuthenticated}}>
+        <AuthContext.Provider value={{ token, currentUserId, isAuthenticated, setToken, setCurrentUserId, setIsAuthenticated, logout}}>
             {children}
         </AuthContext.Provider>
     )
